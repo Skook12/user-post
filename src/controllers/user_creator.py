@@ -8,15 +8,13 @@ class UserCreator:
         self.__create_new_user(person_name, age, height)
         return self.__format_response()
 
-
-
     def __check_if_user_exists(self, person_name:str) -> None:
         select_users = self.__users_repo.select_user(person_name)
         if (not select_users or len(select_users) == 0):
             return
         else:
             raise Exception('User already exists')
-    
+          
     def __create_new_user(self, person_name:str, age:int, height: float) -> None:
         self.__users_repo.insert_user(person_name, age, height)
         return
