@@ -1,4 +1,5 @@
 from src.controllers.interfaces.user_creator import UserCreatorInterface
+from src.errors.error_handler import handle_errors
 from .http_types.http_request import HttpRequest
 from .http_types.http_response import HttpResponse
 
@@ -16,6 +17,6 @@ class UserCreatorView:
             response = self.__controller.insert_new_user(person_name, age, height)
             return HttpResponse(200, response)
         except Exception as e:
-            return HttpResponse(500, {'error': str(e)})
+            return handle_errors(e)
     
     

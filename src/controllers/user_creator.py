@@ -1,3 +1,4 @@
+from src.errors.error_types.http_bad_request import HttpBadRequestError
 from src.models.repositories.interfaces.users_repository import UsersRepositoryInterface
 from .interfaces.user_creator import UserCreatorInterface
 
@@ -16,7 +17,7 @@ class UserCreator(UserCreatorInterface):
         if (not select_users or len(select_users) == 0):
             return
         else:
-            raise Exception('User already exists')
+            raise HttpBadRequestError('User already exists')
           
     def __create_new_user(self, person_name:str, age:int, height: float) -> None:
         self.__users_repo.insert_user(person_name, age, height)
